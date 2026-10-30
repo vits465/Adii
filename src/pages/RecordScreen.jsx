@@ -11,6 +11,8 @@ import {
   Code,
   Check,
   ChevronRight,
+  Sparkles,
+  Terminal,
 } from 'lucide-react'
 import { GithubIcon } from '../components/SocialIcons'
 
@@ -19,6 +21,8 @@ const DOMAIN_MODULES = [
     name: 'Authentication & Access Control',
     endpoints: 18,
     collections: 4,
+    color: 'from-cyan-500 to-blue-500',
+    accentText: 'text-cyan-400',
     desc: 'JWT token rotation, HTTP-only cookie handlers, role-based middleware (Admin, Staff, Trade Client, B2C Customer), bcrypt password hashing.',
     sampleRoutes: [
       { method: 'POST', path: '/api/v1/auth/register', desc: 'Zod-validated payload, creates customer or trade profile' },
@@ -31,6 +35,8 @@ const DOMAIN_MODULES = [
     name: 'Product Catalogue & Variants',
     endpoints: 42,
     collections: 14,
+    color: 'from-emerald-500 to-teal-500',
+    accentText: 'text-emerald-400',
     desc: 'Deep multi-variant modeling for wallpapers, fabrics, furnishings, and paint. Dimension calculations, pattern repeats, swatch inventory.',
     sampleRoutes: [
       { method: 'GET', path: '/api/v1/products', desc: 'Faceted search, category filters, sorting & pagination' },
@@ -43,6 +49,8 @@ const DOMAIN_MODULES = [
     name: 'Cart, Pricing & Discount Engine',
     endpoints: 24,
     collections: 6,
+    color: 'from-violet-500 to-purple-500',
+    accentText: 'text-violet-400',
     desc: 'Guest vs. authenticated cart hydration, B2B tiered wholesale pricing rules, promotional voucher coupons, dynamic tax computation.',
     sampleRoutes: [
       { method: 'GET', path: '/api/v1/cart', desc: 'Computes real-time line items, subtotal, and tax' },
@@ -54,6 +62,8 @@ const DOMAIN_MODULES = [
     name: 'Checkout & Razorpay Payments',
     endpoints: 36,
     collections: 11,
+    color: 'from-amber-500 to-rose-500',
+    accentText: 'text-amber-400',
     desc: 'Order state machine (Created → Authorized → Captured → Dispatched → Refunded). Razorpay cryptographic HMAC-SHA256 signature verification.',
     sampleRoutes: [
       { method: 'POST', path: '/api/v1/orders/checkout', desc: 'Locks inventory and generates Razorpay Order ID' },
@@ -65,6 +75,8 @@ const DOMAIN_MODULES = [
     name: 'Media Pipeline & Admin Analytics',
     endpoints: 36,
     collections: 8,
+    color: 'from-pink-500 to-fuchsia-500',
+    accentText: 'text-fuchsia-400',
     desc: 'Cloudinary media CDN integration, on-the-fly transformations (w_1400, f_auto, q_auto), sales analytics dashboard, revenue reports.',
     sampleRoutes: [
       { method: 'GET', path: '/api/v1/admin/analytics/revenue', desc: 'MongoDB aggregation pipeline for MRR, AOV, and volume' },
@@ -73,26 +85,39 @@ const DOMAIN_MODULES = [
   },
 ]
 
-export default function RecordScreen() {
+export default function RecordScreen({ onOpenApiConsole }) {
   const [activeModule, setActiveModule] = useState(DOMAIN_MODULES[0])
 
   return (
-    <section className="relative min-h-screen pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto z-10">
+    <section className="relative min-h-screen pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto z-10 overflow-hidden">
+      {/* Background Aurora Orbs */}
+      <div className="aurora-orb w-[550px] h-[550px] bg-gradient-to-tr from-indigo-500/15 via-cyan-500/10 to-transparent top-20 -right-40" />
+
       {/* Title Header */}
-      <div className="mb-12 pb-8 border-b border-white/10">
-        <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 glow-beacon" />
+      <div className="mb-12 pb-8 border-b border-white/10 relative z-10">
+        <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-indigo-400 mb-2 font-bold">
+          <span className="w-2.5 h-2.5 rounded-full bg-indigo-400 glow-purple" />
           ENTERPRISE CAPSTONE ARCHITECTURE ARCHIVE
         </div>
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-sarrif font-black text-white tracking-wide">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-sarrif font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-100 to-cyan-300 tracking-wide">
           SYSTEM RECORD: HOUSE OF HACKNEY.
         </h1>
-        <p className="text-sm sm:text-base text-zinc-400 mt-2 max-w-3xl font-sans">
+        <p className="text-sm sm:text-base text-zinc-300 mt-2 max-w-3xl font-sans">
           A full-stack, enterprise-grade luxury e-commerce engine designed with a 3-layer architecture, 156 REST endpoints, and 43 MongoDB collections.
         </p>
 
         {/* Live Project Links */}
         <div className="flex flex-wrap items-center gap-3 mt-6">
+          {onOpenApiConsole && (
+            <button
+              onClick={onOpenApiConsole}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-mono font-bold text-xs tracking-wider shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:scale-105 transition-all"
+            >
+              <Terminal size={14} />
+              <span>TEST INTERACTIVE API CONSOLE</span>
+            </button>
+          )}
+
           <a
             href="https://houseofhackney.vercel.app"
             target="_blank"
@@ -107,7 +132,7 @@ export default function RecordScreen() {
             href="https://houseofhackney-backeend.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs tracking-wider border border-white/20 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 font-mono text-xs tracking-wider border border-cyan-500/30 transition-all shadow-[0_0_15px_rgba(6,182,212,0.2)]"
           >
             <Server size={14} />
             <span>LIVE API ENDPOINTS</span>
@@ -135,11 +160,11 @@ export default function RecordScreen() {
         </div>
       </div>
 
-      {/* 3-Tier Layered Architecture Diagram */}
-      <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-white/10 mb-16">
+      {/* 3-Tier Layered Architecture Diagram with Refined Indigo Colors */}
+      <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-white/10 mb-16 shadow-2xl relative z-10">
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
           <div>
-            <div className="text-xs font-mono uppercase tracking-widest text-emerald-400">
+            <div className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-bold">
               STRUCTURAL DESIGN PATTERN
             </div>
             <h2 className="text-2xl sm:text-3xl font-sarrif font-bold text-white">
@@ -151,20 +176,20 @@ export default function RecordScreen() {
           </span>
         </div>
 
-        {/* Interactive Architecture Flow Diagram */}
+        {/* 4-Layer Architecture Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
-          {/* Layer 1: Client & Middleware */}
-          <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
+          {/* Layer 1: Client & Gateway */}
+          <div className="p-5 rounded-2xl bg-[#090d1a] border border-cyan-500/35 shadow-[0_0_20px_rgba(6,182,212,0.15)] flex flex-col justify-between">
             <div>
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs mb-3">
+              <div className="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-mono font-bold text-xs mb-3 shadow-[0_0_10px_rgba(6,182,212,0.3)]">
                 01
               </div>
               <h3 className="font-sarrif font-bold text-base text-white">Client & Gateway</h3>
-              <p className="text-xs text-zinc-400 mt-1 font-sans">
+              <p className="text-xs text-zinc-300 mt-1 font-sans">
                 React 19 SPA + Redux Toolkit communicating via REST JSON payloads.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-zinc-400">
+            <div className="mt-4 pt-3 border-t border-cyan-500/20 text-[11px] font-mono text-cyan-300/80">
               • Helmet & CORS<br />
               • Rate Limiting<br />
               • JWT Authorization
@@ -172,17 +197,17 @@ export default function RecordScreen() {
           </div>
 
           {/* Layer 2: Controllers */}
-          <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
+          <div className="p-5 rounded-2xl bg-[#090d1a] border border-indigo-500/35 shadow-[0_0_20px_rgba(99,102,241,0.15)] flex flex-col justify-between">
             <div>
-              <div className="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-mono font-bold text-xs mb-3">
+              <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-mono font-bold text-xs mb-3 shadow-[0_0_10px_rgba(99,102,241,0.3)]">
                 02
               </div>
               <h3 className="font-sarrif font-bold text-base text-white">Route Controllers</h3>
-              <p className="text-xs text-zinc-400 mt-1 font-sans">
+              <p className="text-xs text-zinc-300 mt-1 font-sans">
                 Handles HTTP request/response cycle, status codes, and payload parsing.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-zinc-400">
+            <div className="mt-4 pt-3 border-t border-indigo-500/20 text-[11px] font-mono text-indigo-300/80">
               • Zod Payload Schema<br />
               • HTTP Status Mapping<br />
               • Centralized Errors
@@ -190,17 +215,17 @@ export default function RecordScreen() {
           </div>
 
           {/* Layer 3: Services */}
-          <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
+          <div className="p-5 rounded-2xl bg-[#090d1a] border border-violet-500/35 shadow-[0_0_20px_rgba(139,92,246,0.15)] flex flex-col justify-between">
             <div>
-              <div className="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-mono font-bold text-xs mb-3">
+              <div className="w-8 h-8 rounded-lg bg-violet-500/20 text-violet-300 flex items-center justify-center font-mono font-bold text-xs mb-3 shadow-[0_0_10px_rgba(139,92,246,0.3)]">
                 03
               </div>
               <h3 className="font-sarrif font-bold text-base text-white">Domain Services</h3>
-              <p className="text-xs text-zinc-400 mt-1 font-sans">
+              <p className="text-xs text-zinc-300 mt-1 font-sans">
                 Pure business logic: pricing rules, discounts, Razorpay signature checks.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-zinc-400">
+            <div className="mt-4 pt-3 border-t border-violet-500/20 text-[11px] font-mono text-violet-300/80">
               • Razorpay HMAC-SHA256<br />
               • Stock Decrement Rules<br />
               • Multi-tier Pricing
@@ -208,17 +233,17 @@ export default function RecordScreen() {
           </div>
 
           {/* Layer 4: Repositories & DB */}
-          <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between">
+          <div className="p-5 rounded-2xl bg-[#090d1a] border border-emerald-500/35 shadow-[0_0_20px_rgba(16,185,129,0.15)] flex flex-col justify-between">
             <div>
-              <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold text-xs mb-3">
+              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-mono font-bold text-xs mb-3 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
                 04
               </div>
               <h3 className="font-sarrif font-bold text-base text-white">Data Layer</h3>
-              <p className="text-xs text-zinc-400 mt-1 font-sans">
+              <p className="text-xs text-zinc-300 mt-1 font-sans">
                 Repository abstraction wrapping 43 Mongoose models and transactions.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-zinc-400">
+            <div className="mt-4 pt-3 border-t border-emerald-500/20 text-[11px] font-mono text-emerald-300/80">
               • 43 Collections<br />
               • Cloudinary CDN<br />
               • ACID Transactions
@@ -228,10 +253,10 @@ export default function RecordScreen() {
       </div>
 
       {/* Interactive Domain Module Explorer */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
         {/* Module Selector Sidebar */}
         <div className="space-y-3">
-          <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-2">
+          <div className="text-xs font-mono uppercase tracking-widest text-indigo-400 font-bold mb-2">
             5 Core Domain Modules (156 Endpoints)
           </div>
           {DOMAIN_MODULES.map((mod, idx) => (
@@ -240,13 +265,13 @@ export default function RecordScreen() {
               onClick={() => setActiveModule(mod)}
               className={`w-full text-left p-4 rounded-2xl transition-all border ${
                 activeModule.name === mod.name
-                  ? 'bg-white text-black font-bold border-white shadow-xl'
+                  ? `bg-gradient-to-r ${mod.color} text-white font-bold border-transparent shadow-[0_0_25px_rgba(99,102,241,0.4)] scale-102`
                   : 'glass-panel text-zinc-300 border-white/10 hover:border-white/30'
               }`}
             >
               <div className="flex items-center justify-between text-xs font-mono">
                 <span>MODULE 0{idx + 1}</span>
-                <span className={activeModule.name === mod.name ? 'text-black' : 'text-emerald-400'}>
+                <span className={activeModule.name === mod.name ? 'text-white' : 'text-emerald-400 font-bold'}>
                   {mod.endpoints} Routes
                 </span>
               </div>
@@ -258,11 +283,11 @@ export default function RecordScreen() {
         </div>
 
         {/* Selected Module Detail Panel */}
-        <div className="lg:col-span-2 glass-panel p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+        <div className="lg:col-span-2 glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between">
           <div>
             <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-white/10">
               <div>
-                <span className="text-xs font-mono uppercase text-emerald-400">
+                <span className={`text-xs font-mono uppercase font-bold ${activeModule.accentText}`}>
                   {activeModule.collections} MongoDB Collections • {activeModule.endpoints} REST Endpoints
                 </span>
                 <h3 className="text-2xl font-sarrif font-bold text-white mt-1">
@@ -277,27 +302,27 @@ export default function RecordScreen() {
 
             {/* Sample Endpoints Table */}
             <div className="space-y-2.5">
-              <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-2">
+              <div className="text-xs font-mono uppercase tracking-widest text-indigo-300 font-bold mb-2">
                 Sample Production Endpoints
               </div>
               {activeModule.sampleRoutes.map((r, i) => (
                 <div
                   key={i}
-                  className="p-3.5 rounded-xl bg-black/60 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                  className="p-3.5 rounded-xl bg-[#070b14] border border-white/10 hover:border-indigo-500/30 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-2"
                 >
                   <div className="flex items-center gap-3 font-mono text-xs">
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                      className={`px-2.5 py-0.5 rounded text-[10px] font-bold shadow-sm ${
                         r.method === 'GET'
-                          ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
+                          ? 'bg-sky-500/25 text-sky-300 border border-sky-500/40'
                           : r.method === 'POST'
-                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                          : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                          ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-500/40'
+                          : 'bg-amber-500/25 text-amber-300 border border-amber-500/40'
                       }`}
                     >
                       {r.method}
                     </span>
-                    <span className="text-zinc-200">{r.path}</span>
+                    <span className="text-zinc-200 font-semibold">{r.path}</span>
                   </div>
                   <div className="text-[11px] font-sans text-zinc-400 text-left sm:text-right">
                     {r.desc}
@@ -315,7 +340,7 @@ export default function RecordScreen() {
               href="https://houseofhackney-backeend.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
+              className="flex items-center gap-1.5 text-xs font-mono font-bold text-cyan-300 hover:text-cyan-200 transition-colors"
             >
               <span>TEST ON LIVE SWAGGER</span>
               <ExternalLink size={13} />

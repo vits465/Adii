@@ -17,7 +17,7 @@
 }
 
 body {
-  background-color: #000000;
+  background-color: #07090e;
   color: #ffffff;
   font-family: var(--font-space);
   overflow-x: hidden;
@@ -25,23 +25,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar */
+/* Custom Colorful Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #090d16;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: linear-gradient(180deg, #8b5cf6, #06b6d4, #10b981);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: linear-gradient(180deg, #a855f7, #38bdf8, #34d399);
 }
 
-/* Typography Helpers matching undefined-shin */
+/* Typography Helpers */
 .font-sarrif {
   font-family: var(--font-sarrif);
   letter-spacing: -0.02em;
@@ -59,7 +59,7 @@ body {
   font-family: var(--font-mono);
 }
 
-/* 3D Perspective Card Tilt from undefined-shin */
+/* 3D Perspective Card Tilt */
 .perspective-container {
   perspective: 1200px;
   transform-style: preserve-3d;
@@ -67,7 +67,7 @@ body {
 
 .tilt-card {
   transform-style: preserve-3d;
-  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease, border-color 0.3s ease;
   will-change: transform;
 }
 
@@ -75,13 +75,13 @@ body {
   transform: translateZ(35px);
 }
 
-/* Split Curtains */
+/* Split Curtains with Colorful Gradient Edge */
 .curtain-panel {
   position: fixed;
   left: 0;
   width: 100vw;
   height: 50vh;
-  background-color: #000000;
+  background-color: #05070d;
   z-index: 1000;
   pointer-events: none;
   transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
@@ -89,10 +89,12 @@ body {
 .curtain-panel.top {
   top: 0;
   transform-origin: top;
+  border-bottom: 2px solid rgba(139, 92, 246, 0.5);
 }
 .curtain-panel.bottom {
   bottom: 0;
   transform-origin: bottom;
+  border-top: 2px solid rgba(6, 182, 212, 0.5);
 }
 .curtain-open .curtain-panel.top {
   transform: scaleY(0);
@@ -112,29 +114,107 @@ body {
   pointer-events: none;
 }
 
-/* Glassmorphism & Brutalist Panels */
-.brutalist-border {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.brutalist-border-hover:hover {
-  border-color: rgba(255, 255, 255, 0.45);
-}
-
+/* Vibrant Glassmorphism Panels */
 .glass-panel {
-  background: rgba(10, 10, 10, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(13, 17, 28, 0.68);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.glow-beacon {
-  box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+.glass-panel-glow {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(139, 92, 246, 0.12);
 }
 
-/* Grain texture overlay */
-.grain-overlay {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
-  background-size: 24px 24px;
+/* Glowing Neon Beacons */
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.7);
+}
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.7);
+}
+.glow-purple {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.7);
+}
+.glow-rose {
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.7);
 }
 
+/* Animated Gradient Text */
+.gradient-text-rainbow {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 25%, #a855f7 50%, #ec4899 75%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-aurora {
+  background: linear-gradient(135deg, #34d399 0%, #06b6d4 40%, #8b5cf6 80%, #d946ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-fire {
+  background: linear-gradient(135deg, #fbbf24 0%, #f97316 40%, #ef4444 80%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Aurora Background Orbs */
+.aurora-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  opacity: 0.35;
+  animation: float 14s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(30px, -40px) scale(1.1);
+  }
+  100% {
+    transform: translate(-30px, 30px) scale(0.95);
+  }
+}
+
+/* Page & Tab Entrance Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes tabSwitchWipe {
+  0% {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-tabSwitch {
+  animation: tabSwitchWipe 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

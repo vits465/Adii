@@ -234,7 +234,7 @@ export const educationAndCertifications = {
     {
       title: "Full Stack Web Development",
       provider: "Oscar Career Point Academy, Surat",
-      status: "In Progress / Advanced Practical",
+      status: "Completed",
       topics: "Modern MERN Stack Architecture, Advanced State Management, REST API design, Deployment, Performance Optimization",
     },
     {
